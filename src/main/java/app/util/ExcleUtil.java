@@ -15,7 +15,7 @@ import java.util.List;
 
 
 /**
- * @author <a href="mailto:Administrator@gtmap.cn">Administrator</a>
+ * @author <a href="mailto:tianjian@gtmap.cn">Administrator</a>
  * @version 1.0, 2017/10/18
  * @description
  */
@@ -92,7 +92,7 @@ public class ExcleUtil {
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @param filepath 读取文件对象
+     * @param file 读取文件对象
      * @param sheetName 页签名称
      * @param clazz bean class信息
      * @param params 对应参数信息
@@ -100,10 +100,10 @@ public class ExcleUtil {
      * @return 需要转换的对象集合
      * @description 根据表单和bean生成bean对象集合
      */
-    public static<T> List<T> readExcel(String filepath, String sheetName, Class<T> clazz, String[] params, boolean isTitle) throws Exception{
-        String fileType = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());
+    public static<T> List<T> readExcel(File file, String sheetName, Class<T> clazz, String[] params, boolean isTitle) throws Exception{
+        String fileType = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
         InputStream is = null;
-        Workbook wb = getWorkBook(fileType, new FileInputStream(filepath));
+        Workbook wb = getWorkBook(fileType, new FileInputStream(file));
         try {
             List<T> result = new ArrayList<T>();//对应excel文件
 
@@ -182,7 +182,7 @@ public class ExcleUtil {
 
     public static void main(String[] args) throws Exception {
         String[] params = new String[]{"xzq", "gmsj", "zslx", "qsbh", "jsbh", "sbr"};
-        List<PurchaseHistory> purchaseHistorys = readExcel("D:/test.xlsx", "新购证书信息", PurchaseHistory.class, params, true);
+        List<PurchaseHistory> purchaseHistorys = readExcel(new File("D:/test.xlsx"), "新购证书信息", PurchaseHistory.class, params, true);
         for(PurchaseHistory purchaseHistory : purchaseHistorys) {
             System.out.println(purchaseHistory.getQsbh());
             System.out.println(purchaseHistory.getGmsj());

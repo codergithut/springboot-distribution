@@ -6,4 +6,6 @@ package app.service.certificate.web.common;
  * @description
  */
 public interface ImportDataService {
+
+
 }
