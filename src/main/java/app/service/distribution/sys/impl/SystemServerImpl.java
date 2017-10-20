@@ -1,7 +1,7 @@
 package app.service.distribution.sys.impl;
 
 import app.config.Constant;
-import app.domain.entity.certificate.Distribution;
+import app.domain.entity.Distribution;
 import app.domain.model.http.HttpRequestMessage;
 import app.domain.model.http.HttpResponseMessage;
 import app.service.distribution.sys.SystemServer;

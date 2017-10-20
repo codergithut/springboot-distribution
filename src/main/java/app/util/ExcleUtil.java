@@ -1,6 +1,6 @@
 package app.util;
 
-import app.domain.entity.certificate.PurchaseHistory;
+import app.domain.entity.PurchaseHistory;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;

@@ -1,9 +1,9 @@
 package app.service.certificate.web.security.impl;
 
 import app.dao.SecurityDao;
-import app.domain.entity.security.Role;
-import app.domain.entity.security.SecurityUser;
-import app.domain.entity.security.User;
+import app.domain.entity.Role;
+import app.domain.entity.SecurityUser;
+import app.domain.entity.User;
 import app.service.certificate.web.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

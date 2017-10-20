@@ -1,14 +1,11 @@
 package app.controller;
 
-import app.config.Constant;
-import app.domain.entity.certificate.Distribution;
+import app.domain.entity.Distribution;
 import app.domain.model.http.HttpRequestMessage;
 import app.domain.model.http.HttpResponseMessage;
 import app.service.distribution.sys.SystemServer;
 import app.service.distribution.sys.TokenServer;
-import app.util.SymmetricEncoder;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;

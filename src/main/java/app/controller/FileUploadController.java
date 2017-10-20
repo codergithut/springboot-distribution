@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.domain.entity.certificate.PurchaseHistory;
+import app.domain.entity.PurchaseHistory;
 import app.util.ExcleUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

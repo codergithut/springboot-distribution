@@ -1,7 +1,7 @@
 package app.dao;
 
-import app.domain.entity.security.Role;
-import app.domain.entity.security.User;
+import app.domain.entity.Role;
+import app.domain.entity.User;
 
 import java.util.List;
 

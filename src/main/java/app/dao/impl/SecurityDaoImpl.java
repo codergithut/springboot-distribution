@@ -1,8 +1,8 @@
 package app.dao.impl;
 
 import app.dao.SecurityDao;
-import app.domain.entity.security.Role;
-import app.domain.entity.security.User;
+import app.domain.entity.Role;
+import app.domain.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
