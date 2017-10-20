@@ -7,11 +7,7 @@ package app.domain.model.http;
  */
 public class HttpRequestMessage {
 
-    /**
-     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 地区编号
-     */
-    private String code;
+
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
@@ -19,25 +15,19 @@ public class HttpRequestMessage {
      */
     private String type;
 
-    /**
-     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 机构名称
-     */
-    private String name;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 消息名称
+     * @description 消息内容
      */
-    private String message;
+    private Object message;
 
-    public String getCode() {
-        return code;
-    }
+    /**
+     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
+     * @description 对话安全信息(token 用户名和密码加密AES加密)
+     */
+    private String token;
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getType() {
         return type;
@@ -47,19 +37,20 @@ public class HttpRequestMessage {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMessage() {
+    public Object getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Object message) {
         this.message = message;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

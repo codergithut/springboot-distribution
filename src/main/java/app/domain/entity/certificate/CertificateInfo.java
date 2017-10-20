@@ -29,9 +29,9 @@ public class CertificateInfo {
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 印刷流水号
+     * @description 权证印刷序列号
      */
-    private String yslsh;
+    private String qzysxlh;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
@@ -87,12 +87,12 @@ public class CertificateInfo {
         this.zslx = zslx;
     }
 
-    public String getYslsh() {
-        return yslsh;
+    public String getQzysxlh() {
+        return qzysxlh;
     }
 
-    public void setYslsh(String yslsh) {
-        this.yslsh = yslsh;
+    public void setQzysxlh(String qzysxlh) {
+        this.qzysxlh = qzysxlh;
     }
 
     public String getSysj() {

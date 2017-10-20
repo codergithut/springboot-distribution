@@ -9,5 +9,7 @@ import app.domain.model.http.HttpResponseMessage;
  * @description
  */
 public interface SystemServer {
-    HttpResponseMessage distributionServer(HttpRequestMessage httpRequestMessage);
+
+    HttpResponseMessage systemServer(HttpRequestMessage httpRequestMessage);
+
 }

@@ -1,20 +1,15 @@
 package app.service.distribution.sys.impl;
 
 import app.config.Constant;
+import app.domain.entity.certificate.Distribution;
 import app.domain.model.http.HttpRequestMessage;
 import app.domain.model.http.HttpResponseMessage;
-import app.domain.model.rabbit.RabbitMessageInfo;
-import app.domain.model.rabbit.RabbitMqInfo;
-import app.domain.model.rabbit.ServerModel;
 import app.service.distribution.sys.SystemServer;
-import app.service.rabbit.ReceivedMessage;
-import app.service.rabbit.SenderMessage;
+import app.service.rabbit.send.SenderMessageTemplate;
 import app.util.SymmetricEncoder;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author <a href="mailto:Administrator@gtmap.cn">Administrator</a>
@@ -25,47 +20,29 @@ import java.util.concurrent.TimeoutException;
 public class SystemServerImpl implements SystemServer {
 
     @Autowired
-    ReceivedMessage receivedMessage;
+    SenderMessageTemplate senderMessageTemplate;
 
-
+    /**
+     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
+     * @param
+     * @return
+     * @description 为请求对象添加附加信息并返回
+     */
     @Override
-    public HttpResponseMessage distributionServer(HttpRequestMessage httpRequestMessage) {
-
-        String encode = SymmetricEncoder.AESEncode(Constant.AES_KEY, httpRequestMessage.getMessage());
-
-        RabbitMqInfo rabbitMqInfo = new RabbitMqInfo();
-        rabbitMqInfo.setHost("127.0.0.1");
-        rabbitMqInfo.setPassword("guest");
-        rabbitMqInfo.setUsername("guest");
-        rabbitMqInfo.setPort(5672);
-
-        ServerModel serverModel = new ServerModel();
-        serverModel.setExchange("test");
-        serverModel.setQueuename("test");
-        serverModel.setType("distributionServer");
-
-        RabbitMessageInfo messageInfo = new RabbitMessageInfo();
-        messageInfo.setMessage(encode);
-        messageInfo.setRabbitMqInfo(rabbitMqInfo);
-        messageInfo.setServerModel(serverModel);
-
-        HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
-        httpResponseMessage.setCode("dafeng");
-        httpResponseMessage.setErrorinfo(null);
-        httpResponseMessage.setResponsecode("0000");
-        httpResponseMessage.setResultinfo(encode);
-
-        try {
-            SenderMessage.sendQueueMessage(messageInfo);
-            if(!ReceivedMessage.isFlag()) {
-                receivedMessage.customerMessage(rabbitMqInfo, serverModel);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
+    public HttpResponseMessage systemServer(HttpRequestMessage httpRequestMessage) {
+        if(httpRequestMessage.getType().equals("distribution")) {
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage();
+            Distribution distribution = (Distribution) httpRequestMessage.getMessage();
+            String encode = SymmetricEncoder.AESEncode(Constant.AES_KEY, distribution.getZmh());
+            distribution.setPh(encode);
+            httpResponseMessage.setCode("dafeng");
+            httpResponseMessage.setErrorinfo(null);
+            httpResponseMessage.setResponsecode("0000");
+            httpResponseMessage.setResultinfo(JSON.toJSONString(distribution));
+            senderMessageTemplate.senderMessage(JSON.toJSONString(httpRequestMessage.getMessage()), "distribution", "exchange");
+            return httpResponseMessage;
         }
-
-        return httpResponseMessage;
+        return null;
     }
+
 }
