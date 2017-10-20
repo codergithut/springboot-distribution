@@ -1,4 +1,4 @@
-package app.domain.entity.security;
+package app.domain.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

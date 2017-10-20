@@ -1,13 +1,11 @@
-package app.domain.entity.certificate;
-
-import java.util.Date;
+package app.domain.entity;
 
 /**
  * @author <a href="mailto:tianjian@gtmap.cn">Administrator</a>
  * @version 1.0, 2017/10/17
  * @description
  */
-public class PurchaseHistory {
+public class CertificateInfo {
 
     private String id;
 
@@ -21,7 +19,7 @@ public class PurchaseHistory {
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
      * @description 购买时间
      */
-    private Date gmsj;
+    private String gmsj;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
@@ -31,15 +29,33 @@ public class PurchaseHistory {
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 起始编号
+     * @description 权证印刷序列号
      */
-    private String qsbh;
+    private String qzysxlh;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 结束编号
+     * @description 使用时间
      */
-    private String jsbh;
+    private String sysj;
+
+    /**
+     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
+     * @description 使用情况
+     */
+    private String syqk;
+
+    /**
+     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
+     * @description 不动产权证号
+     */
+    private String bdcqzh;
+
+    /**
+     * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
+     * @description 现状
+     */
+    private String xz;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
@@ -55,11 +71,11 @@ public class PurchaseHistory {
         this.xzq = xzq;
     }
 
-    public Date getGmsj() {
+    public String getGmsj() {
         return gmsj;
     }
 
-    public void setGmsj(Date gmsj) {
+    public void setGmsj(String gmsj) {
         this.gmsj = gmsj;
     }
 
@@ -71,20 +87,44 @@ public class PurchaseHistory {
         this.zslx = zslx;
     }
 
-    public String getQsbh() {
-        return qsbh;
+    public String getQzysxlh() {
+        return qzysxlh;
     }
 
-    public void setQsbh(String qsbh) {
-        this.qsbh = qsbh;
+    public void setQzysxlh(String qzysxlh) {
+        this.qzysxlh = qzysxlh;
     }
 
-    public String getJsbh() {
-        return jsbh;
+    public String getSysj() {
+        return sysj;
     }
 
-    public void setJsbh(String jsbh) {
-        this.jsbh = jsbh;
+    public void setSysj(String sysj) {
+        this.sysj = sysj;
+    }
+
+    public String getSyqk() {
+        return syqk;
+    }
+
+    public void setSyqk(String syqk) {
+        this.syqk = syqk;
+    }
+
+    public String getBdcqzh() {
+        return bdcqzh;
+    }
+
+    public void setBdcqzh(String bdcqzh) {
+        this.bdcqzh = bdcqzh;
+    }
+
+    public String getXz() {
+        return xz;
+    }
+
+    public void setXz(String xz) {
+        this.xz = xz;
     }
 
     public String getSbr() {

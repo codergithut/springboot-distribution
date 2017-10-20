@@ -1,4 +1,4 @@
-package app.domain.entity.security;
+package app.domain.entity;
 
 /**
  * @author <a href="mailto:Administrator@gtmap.cn">Administrator</a>

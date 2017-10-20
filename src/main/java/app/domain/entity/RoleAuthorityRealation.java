@@ -1,15 +1,15 @@
-package app.domain.entity.security;
+package app.domain.entity;
 
 /**
  * @author <a href="mailto:Administrator@gtmap.cn">Administrator</a>
  * @version 1.0, 2017/10/17
  * @description
  */
-public class Role {
+public class RoleAuthorityRealation {
 
     private String roleid;
 
-    private String rolename;
+    private String authorityid;
 
     public String getRoleid() {
         return roleid;
@@ -19,11 +19,11 @@ public class Role {
         this.roleid = roleid;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getAuthorityid() {
+        return authorityid;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setAuthorityid(String authorityid) {
+        this.authorityid = authorityid;
     }
 }

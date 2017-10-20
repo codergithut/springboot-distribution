@@ -1,11 +1,11 @@
-package app.domain.entity.certificate;
+package app.domain.entity;
 
 /**
  * @author <a href="mailto:tianjian@gtmap.cn">Administrator</a>
  * @version 1.0, 2017/10/17
  * @description
  */
-public class CertificateInfo {
+public class SuperviseInfo {
 
     private String id;
 
@@ -53,15 +53,15 @@ public class CertificateInfo {
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 现状
+     * @description 监管类型
      */
-    private String xz;
+    private String jglx;
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @description 上报人
+     * @description 配号信息
      */
-    private String sbr;
+    private String phxx;
 
     public String getXzq() {
         return xzq;
@@ -119,20 +119,20 @@ public class CertificateInfo {
         this.bdcqzh = bdcqzh;
     }
 
-    public String getXz() {
-        return xz;
+    public String getJglx() {
+        return jglx;
     }
 
-    public void setXz(String xz) {
-        this.xz = xz;
+    public void setJglx(String jglx) {
+        this.jglx = jglx;
     }
 
-    public String getSbr() {
-        return sbr;
+    public String getPhxx() {
+        return phxx;
     }
 
-    public void setSbr(String sbr) {
-        this.sbr = sbr;
+    public void setPhxx(String phxx) {
+        this.phxx = phxx;
     }
 
     public String getId() {
