@@ -1,17 +1,19 @@
 package app.util;
 
-import app.domain.entity.PurchaseHistory;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 
 
 /**
@@ -21,9 +23,9 @@ import java.util.List;
  */
 public class ExcleUtil {
 
-    public static String XLS_TYPE = "xls";
+    public static String XLS_TYPE = ".xls";
 
-    public static String XLSX_TYPE = "xlsx";
+    public static String XLSX_TYPE = ".xlsx";
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
@@ -62,7 +64,7 @@ public class ExcleUtil {
             e.printStackTrace();
         } finally {
             if (wb != null) {
-                wb.close();
+//                wb.close();
             }
         }
     }
@@ -92,18 +94,27 @@ public class ExcleUtil {
 
     /**
      * @author <a href="mailto:tianjian@gtmap.cn">tianjian</a>
-     * @param file 读取文件对象
+     * @param input 读取文件对象
      * @param sheetName 页签名称
      * @param clazz bean class信息
      * @param params 对应参数信息
      * @param isTitle 是否含有表头
+     * @param times 包含时间的字段
      * @return 需要转换的对象集合
      * @description 根据表单和bean生成bean对象集合
      */
-    public static<T> List<T> readExcel(File file, String sheetName, Class<T> clazz, String[] params, boolean isTitle) throws Exception{
-        String fileType = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length());
+    public static<T> List<T> readExcel(InputStream input, String name, String sheetName, Class<T> clazz, String[] params, boolean isTitle, List<Integer> times) throws Exception{
         InputStream is = null;
-        Workbook wb = getWorkBook(fileType, new FileInputStream(file));
+
+
+        ConvertUtils.register(new Converter() {
+
+            public Object convert(Class type, Object value) {
+                return value;
+            }
+        }, Date.class);
+
+        Workbook wb = getWorkBook(name, input);
         try {
             List<T> result = new ArrayList<T>();//对应excel文件
 
@@ -130,17 +141,15 @@ public class ExcleUtil {
                     T t = clazz.newInstance();
                     for (int k = 0; k < cellSize; k++) {
                         Cell cell = row.getCell(k);
-                        String value = null;
                         if (cell != null) {
-                            // todo 时间列表现在就先写死了
-                            if(k == 1) {
-                                BeanUtils.setProperty(t, params[k], cell.getDateCellValue());
+                            if(times != null && times.contains(k)) {
+                                System.out.println(cell.getDateCellValue().toString());
+                                Date date = cell.getDateCellValue();
+                                BeanUtils.setProperty(t, params[k], date);
                             } else {
-                                value = cell.toString();
-                                BeanUtils.setProperty(t, params[k], value);
+                                BeanUtils.setProperty(t, params[k], cell.toString());
                             }
                         }
-
                     }
                     result.add(t);
                 }
@@ -150,7 +159,7 @@ public class ExcleUtil {
             throw e;
         } finally {
             if (wb != null) {
-                wb.close();
+//                wb.close();
             }
             if (is != null) {
                 is.close();
@@ -160,14 +169,14 @@ public class ExcleUtil {
 
     private static Workbook getWorkBook(String fileType, InputStream is) throws Exception {
         Workbook wb = null;
-        if (fileType.equals(XLS_TYPE)) {
+        if (fileType.endsWith(XLS_TYPE)) {
             if(is != null) {
                 wb = new HSSFWorkbook(is);
             } else {
                 wb = new HSSFWorkbook();
             }
 
-        } else if (fileType.equals(XLSX_TYPE)) {
+        } else if (fileType.endsWith(XLSX_TYPE)) {
             if( is != null) {
                 wb = new XSSFWorkbook(is);
             } else {
@@ -181,15 +190,6 @@ public class ExcleUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        String[] params = new String[]{"xzq", "gmsj", "zslx", "qsbh", "jsbh", "sbr"};
-        List<PurchaseHistory> purchaseHistorys = readExcel(new File("D:/test.xlsx"), "新购证书信息", PurchaseHistory.class, params, true);
-        for(PurchaseHistory purchaseHistory : purchaseHistorys) {
-            System.out.println(purchaseHistory.getQsbh());
-            System.out.println(purchaseHistory.getGmsj());
-        }
-
-        FileOutputStream outputStream = new FileOutputStream(new File("D:/test1.xlsx"));
-        writeExcel(outputStream, "xlsx", "testhaha", purchaseHistorys, params);
     }
 
 }
